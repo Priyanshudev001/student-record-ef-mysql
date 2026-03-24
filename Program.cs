@@ -1,6 +1,5 @@
 ﻿using StudentRecordSystem.Data;
 using Microsoft.EntityFrameworkCore;
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
 namespace StudentRecordSystem
 {
@@ -10,12 +9,9 @@ namespace StudentRecordSystem
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // ✅ Add DbContext (MySQL)
+            // ✅ Add DbContext (PostgreSQL)
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseMySql(
-                    builder.Configuration.GetConnectionString("DefaultConnection"),
-                    ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))
-                ));
+                options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
